@@ -1,23 +1,18 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { PROJECTS } from '@/lib/data';
-import { FaGithub, FaLinkedin, FaSearch, FaTimes, FaRedo } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import React, { useEffect, useMemo, useState } from "react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const ProjectsPage = () => {
   const [loaded, setLoaded] = useState(false);
   const [query, setQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
-  const [debouncedQuery, setDebouncedQuery] = useState('');
 
-  const normalizedQuery = debouncedQuery.trim().toLowerCase();
-
-  // debounce the search input for better UX
-  useEffect(() => {
-    const t = setTimeout(() => setDebouncedQuery(query), 300);
-    return () => clearTimeout(t);
-  }, [query]);
+  const normalizedQuery = query.trim().toLowerCase();
 
   // filter projects by title, techStack, or category
   const filteredProjects = useMemo(() => {
@@ -39,17 +34,6 @@ const ProjectsPage = () => {
       return matchesQuery && matchesCategory;
     });
   }, [normalizedQuery, categoryFilter]);
-
-  // compute categories with counts for dropdown labels
-  const categoriesWithCount = useMemo(() => {
-    const map = new Map<string, number>();
-    PROJECTS.forEach((p) => {
-      const c = ((p as any).category || '').toString();
-      if (!c) return;
-      map.set(c, (map.get(c) || 0) + 1);
-    });
-    return Array.from(map.entries());
-  }, []);
 
   // trigger animations after mount
   useEffect(() => {
@@ -128,96 +112,20 @@ const ProjectsPage = () => {
               }`}
             >
               <a
-                href="https://drive.google.com/file/d/1IiJSh5-UbwYnj27bLWjpnNTmF3et6luS/view"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/resume"
                 className="px-8 py-4 text-sm md:text-base uppercase tracking-widest rounded-full border border-black bg-black text-white font-semibold hover:bg-white hover:text-black transition-all duration-300 shadow-lg"
               >
                 View Resume
               </a>
 
               <a
-                href="https://drive.google.com/uc?export=download&id=1IiJSh5-UbwYnj27bLWjpnNTmF3et6luS"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/resume.pdf"
+                download
                 className="px-8 py-4 text-sm md:text-base uppercase tracking-widest rounded-full border border-gray-300 font-semibold hover:border-black hover:bg-gray-50 transition-all duration-300 shadow-md"
               >
                 Download Resume
               </a>
             </div>
-          </div>
-        </div>
-
-        {/* ===== SEARCH + FILTER (modern UI) ===== */}
-        <div className="mb-8">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-            <div className="relative w-full sm:w-2/3">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                <FaSearch />
-              </span>
-              <input
-                aria-label="Search projects"
-                value={query}
-                onChange={(ev) => setQuery(ev.target.value)}
-                placeholder="Search projects, tech, or category..."
-                className="w-full pl-10 pr-12 py-3 rounded-2xl border border-gray-200 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-200 transition"
-              />
-              {query ? (
-                <button
-                  aria-label="Clear search"
-                  onClick={() => setQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 bg-white p-1 rounded-full text-gray-500 hover:text-black"
-                >
-                  <FaTimes />
-                </button>
-              ) : null}
-            </div>
-
-            <div className="flex items-center gap-3 w-full sm:w-1/3">
-              <div className="flex-1">
-                <div className="overflow-x-auto">
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => setCategoryFilter('')}
-                      className={`px-3 py-2 rounded-full text-sm font-medium border ${
-                        categoryFilter === '' ? 'bg-black text-white border-black' : 'bg-white text-gray-700 border-gray-200'
-                      }`}
-                    >
-                      All
-                    </button>
-                    {categoriesWithCount.map(([c, count]) => (
-                      <button
-                        key={c}
-                        onClick={() => setCategoryFilter(c)}
-                        className={`px-3 py-2 rounded-full text-sm font-medium border ${
-                          categoryFilter === c ? 'bg-black text-white border-black' : 'bg-white text-gray-700 border-gray-200'
-                        }`}
-                      >
-                        {c} <span className="text-gray-400 ml-2">{count}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <button
-                onClick={() => {
-                  setCategoryFilter('');
-                  setQuery('');
-                }}
-                className="px-3 py-2 rounded-full border border-gray-200 bg-white text-sm hover:bg-gray-50"
-                aria-label="Reset filters"
-              >
-                <FaRedo />
-              </button>
-            </div>
-          </div>
-
-          <div className="mt-3 flex items-center justify-between">
-            <div className="text-sm text-gray-600">
-              Showing <span className="font-medium text-black">{filteredProjects.length}</span> project{filteredProjects.length !== 1 ? 's' : ''}
-            </div>
-            <div className="text-sm text-gray-500">Tip: try searching &quot;AI&quot; or &quot;Next.js&quot;</div>
           </div>
         </div>
 
@@ -227,12 +135,7 @@ const ProjectsPage = () => {
             loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
           }`}
         >
-          {filteredProjects.length === 0 ? (
-            <div className="col-span-full text-center py-20 text-gray-500">
-              No projects match your search. Try different keywords or clear filters.
-            </div>
-          ) : (
-            filteredProjects.map((project, idx) => (
+          {PROJECTS.map((project, idx) => (
             <div
               key={project.slug}
               className="transition-all duration-700 ease-out"
@@ -242,10 +145,9 @@ const ProjectsPage = () => {
                 transform: loaded ? "translateY(0px)" : "translateY(40px)",
               }}
             >
-                <ProjectCard project={project} index={idx} searchQuery={normalizedQuery} />
+              <ProjectCard project={project} index={idx} />
             </div>
-            ))
-          )}
+          ))}
         </div>
       </div>
     </section>

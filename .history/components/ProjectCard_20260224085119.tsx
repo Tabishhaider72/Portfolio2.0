@@ -8,10 +8,9 @@ import React, { useRef } from 'react';
 interface ProjectCardProps {
   project: IProject;
   index: number;
-  searchQuery?: string;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, searchQuery }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [imgSrc, setImgSrc] = React.useState(project.thumbnail || '/projects/placeholder.svg');
 
@@ -24,30 +23,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, searchQuery }
       ease: 'power2.out',
     });
   }, { scope: cardRef });
-
-  const renderHighlighted = (text: string, query?: string) => {
-    if (!query) return text;
-    const q = query.trim();
-    if (!q) return text;
-    try {
-      const parts = text.split(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'ig'));
-      return (
-        <>
-          {parts.map((part, i) =>
-            part.toLowerCase() === q.toLowerCase() ? (
-              <mark key={i} className="bg-yellow-100 text-yellow-900 px-0">
-                {part}
-              </mark>
-            ) : (
-              <span key={i}>{part}</span>
-            )
-          )}
-        </>
-      );
-    } catch {
-      return text;
-    }
-    };
 
   return (
     <div
@@ -72,7 +47,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, searchQuery }
       <div className="p-6 flex flex-col gap-2">
         <TransitionLink href={`/projects/${project.slug}`} className="no-underline">
           <h3 className="text-xl md:text-2xl font-bold uppercase tracking-tight text-black mb-1">
-            {renderHighlighted(project.title, searchQuery)}
+            {project.title}
           </h3>
           <div className="text-xs text-gray-600 font-medium mb-2">
             {project.techStack[0] || 'Website Design'}

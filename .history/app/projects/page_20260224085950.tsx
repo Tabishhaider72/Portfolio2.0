@@ -128,18 +128,15 @@ const ProjectsPage = () => {
               }`}
             >
               <a
-                href="https://drive.google.com/file/d/1IiJSh5-UbwYnj27bLWjpnNTmF3et6luS/view"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/resume"
                 className="px-8 py-4 text-sm md:text-base uppercase tracking-widest rounded-full border border-black bg-black text-white font-semibold hover:bg-white hover:text-black transition-all duration-300 shadow-lg"
               >
                 View Resume
               </a>
 
               <a
-                href="https://drive.google.com/uc?export=download&id=1IiJSh5-UbwYnj27bLWjpnNTmF3et6luS"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/resume.pdf"
+                download
                 className="px-8 py-4 text-sm md:text-base uppercase tracking-widest rounded-full border border-gray-300 font-semibold hover:border-black hover:bg-gray-50 transition-all duration-300 shadow-md"
               >
                 Download Resume
@@ -217,7 +214,7 @@ const ProjectsPage = () => {
             <div className="text-sm text-gray-600">
               Showing <span className="font-medium text-black">{filteredProjects.length}</span> project{filteredProjects.length !== 1 ? 's' : ''}
             </div>
-            <div className="text-sm text-gray-500">Tip: try searching &quot;AI&quot; or &quot;Next.js&quot;</div>
+            <div className="text-sm text-gray-500">Tip: try searching "AI" or "Next.js"</div>
           </div>
         </div>
 

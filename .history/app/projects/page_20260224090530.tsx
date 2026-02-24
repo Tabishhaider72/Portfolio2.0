@@ -217,7 +217,7 @@ const ProjectsPage = () => {
             <div className="text-sm text-gray-600">
               Showing <span className="font-medium text-black">{filteredProjects.length}</span> project{filteredProjects.length !== 1 ? 's' : ''}
             </div>
-            <div className="text-sm text-gray-500">Tip: try searching &quot;AI&quot; or &quot;Next.js&quot;</div>
+            <div className="text-sm text-gray-500">Tip: try searching &quot;AI&quot; or "Next.js&quot;</div>
           </div>
         </div>
 

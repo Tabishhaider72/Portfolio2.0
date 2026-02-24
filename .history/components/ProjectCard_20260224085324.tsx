@@ -44,10 +44,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, searchQuery }
           )}
         </>
       );
-    } catch {
+    } catch (e) {
       return text;
     }
-    };
+  };
 
   return (
     <div
