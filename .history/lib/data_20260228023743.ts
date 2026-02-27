@@ -146,7 +146,7 @@ export const PROJECTS: IProject[] = [
       '/projects/images/math-note-2.png',
       '/projects/images/math-note-3.png',
     ],
-    sourceCode: 'https://github.com/Tabishhaider72/math-note',
+    sourceCode: 'https://github.com/yourusername/math-note',
     liveUrl: 'https://math-note-demo.vercel.app/',
     year: 2025,
     description: `
@@ -197,7 +197,7 @@ export const PROJECTS: IProject[] = [
       '/projects/images/bookmyroom-2.png',
       '/projects/images/bookmyroom-3.png',
     ],
-    sourceCode: 'https://github.com/Tabishhaider72/bookmyroom',
+    sourceCode: 'https://github.com/yourusername/bookmyroom',
     liveUrl: 'https://bookmyroom.vercel.app',
     year: 2025,
     description: `
@@ -246,7 +246,7 @@ export const PROJECTS: IProject[] = [
       '/projects/images/my-summarizer-ai-2.png',
       '/projects/images/my-summarizer-ai-3.png',
     ],
-    sourceCode: 'https://github.com/Tabishhaider72/my-summarizer-ai',
+    sourceCode: 'https://github.com/yourusername/my-summarizer-ai',
     liveUrl: 'https://my-summarizer-ai.vercel.app/',
     year: 2025,
     description: `

@@ -109,25 +109,6 @@ export const MY_STACK = {
 };
 
 export const PROJECTS: IProject[] = [
-  // primary project first as requested
-  {
-    title: 'CVRoast Frontend',
-    slug: 'cvroast-frontend',
-    techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
-    thumbnail: '/projects/Project4.png',
-    longThumbnail: '/projects/Project4.png',
-    images: ['/projects/Project4.png'],
-    sourceCode: 'https://github.com/Tabishhaider72/cvroast-frontend',
-    liveUrl: 'https://cvroaster-ai.vercel.app',
-    year: 2025,
-    description: `AI-powered ATS resume analysis dashboard for evaluating resumes with structured scoring and recruiter insights.
-
-  Tech & Architecture: Frontend-only dashboard built with Next.js and TypeScript that consumes an AI scoring API. The UI visualizes ATS-style scoring and recruiter-friendly insights using charts and structured cards. The app is componentized for reusability and supports file uploads that are sent to the analysis API.
-
-  Features & Highlights: Resume upload and parsing interface, ATS scoring visualization, AI-generated feedback snippets, and a modern SaaS-style dashboard layout optimized for recruiter workflows. Focused on accessibility and clear data visualization for decision-making.
-  `,
-    role: `Frontend Engineer — built the dashboard UI, upload flows, and visualization components.`,
-  },
   {
     title: 'Math Note',
     slug: 'math-note',
@@ -146,7 +127,7 @@ export const PROJECTS: IProject[] = [
       '/projects/images/math-note-2.png',
       '/projects/images/math-note-3.png',
     ],
-    sourceCode: 'https://github.com/Tabishhaider72/math-note',
+    sourceCode: 'https://github.com/yourusername/math-note',
     liveUrl: 'https://math-note-demo.vercel.app/',
     year: 2025,
     description: `
@@ -197,8 +178,8 @@ export const PROJECTS: IProject[] = [
       '/projects/images/bookmyroom-2.png',
       '/projects/images/bookmyroom-3.png',
     ],
-    sourceCode: 'https://github.com/Tabishhaider72/bookmyroom',
-    liveUrl: 'https://bookmyroom.vercel.app',
+    sourceCode: 'https://github.com/yourusername/bookmyroom',
+    liveUrl: 'https://bookmyroom-demo.vercel.app/',
     year: 2025,
     description: `
       BookMyRoom is a full-stack hotel booking platform designed to provide a smooth and efficient booking experience through real-time data synchronization and SSR-enabled listings. <br/><br/>
@@ -246,7 +227,7 @@ export const PROJECTS: IProject[] = [
       '/projects/images/my-summarizer-ai-2.png',
       '/projects/images/my-summarizer-ai-3.png',
     ],
-    sourceCode: 'https://github.com/Tabishhaider72/my-summarizer-ai',
+    sourceCode: 'https://github.com/yourusername/my-summarizer-ai',
     liveUrl: 'https://my-summarizer-ai.vercel.app/',
     year: 2025,
     description: `
@@ -354,7 +335,7 @@ export const PROJECTS: IProject[] = [
       longThumbnail: '/projects/Project5.png',
       images: ['/projects/Project5.png'],
       sourceCode: 'https://github.com/Tabishhaider72/Ai-Data-Insighter',
-      liveUrl: 'https://ai-data-insighter.vercel.app',
+      liveUrl: undefined,
       year: 2026,
       description: `AI-based system for extracting structured insights and analytics from datasets.
 
@@ -374,7 +355,7 @@ export const PROJECTS: IProject[] = [
       longThumbnail: '/projects/Project6.png',
       images: ['/projects/Project6.png'],
       sourceCode: 'https://github.com/Tabishhaider72/kun-fayakoon-NGO',
-      liveUrl: 'https://kun-fayakoon-ngo.vercel.app',
+      liveUrl: undefined,
       year: 2024,
       description: `Web platform for NGO operations and community initiatives with modern responsive UI and organization management features.
 
@@ -412,7 +393,7 @@ export const PROJECTS: IProject[] = [
       longThumbnail: '/projects/Project8.png',
       images: ['/projects/Project8.png'],
       sourceCode: 'https://github.com/Tabishhaider72/Medblocks',
-      liveUrl: 'https://medblocks-olive.vercel.app',
+      liveUrl: undefined,
       year: 2024,
       description: `Healthcare-oriented platform designed for secure data handling and medical information management.
 
@@ -422,7 +403,26 @@ export const PROJECTS: IProject[] = [
   `,
       role: `Backend & Frontend Contributor — implemented secure API endpoints and responsive UI modules focused on data safety.`,
     },
-    
+
+    {
+      title: 'Reeltor Assessment',
+      slug: 'reeltor-assessment',
+      techStack: ['React', 'JavaScript', 'CSS'],
+      thumbnail: '/projects/Project9.png',
+      longThumbnail: '/projects/Project9.png',
+      images: ['/projects/Project9.png'],
+      sourceCode: 'https://github.com/Tabishhaider72/Reeltor_Assessment',
+      liveUrl: undefined,
+      year: 2023,
+      description: `Frontend technical assessment project demonstrating UI development and responsive layout implementation.
+
+  Tech & Architecture: Focused single-page React app implementing component-based layout, responsive CSS patterns, and accessible interactions. Emphasis on animation-light, performant layout strategies for a smooth user experience.
+
+  Features & Highlights: Reusable UI components, fluid responsive grids, and crisp micro-interactions to showcase frontend craftsmanship and layout problem solving. Good candidate for reuse as a design system seed.
+  `,
+      role: `Frontend Engineer — implemented pixel-accurate UI and responsive behaviors for the assessment.`,
+    },
+
     {
       title: 'Real-Time Chat Application',
       slug: 'real-time-chat',
@@ -520,7 +520,7 @@ export const PROJECTS: IProject[] = [
 
 export const MY_EXPERIENCE = [
     {
-        title: 'Fullstack Developer (Next.js, NestJS)',
+        title: 'Frontend Developer (Next.js, NestJS)',
         company: 'Skilzen -Hiring Bird',
         duration: 'Aug 2024 – Jan 2025',
     },
