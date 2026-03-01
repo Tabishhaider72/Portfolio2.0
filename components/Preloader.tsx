@@ -48,7 +48,7 @@ const Preloader = () => {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
                 <div className="profile-pic mb-6 flex justify-center">
                     <Image
-                        src="/public/profile1.png"
+                        src="/public/Profile1.png"
                         alt="Profile Picture"
                         width={165}
                         height={170}
