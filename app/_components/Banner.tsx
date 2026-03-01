@@ -81,7 +81,7 @@ const Banner = () => {
                 {/* 3D Character Image */}
                 <div className="hidden lg:flex items-center justify-center flex-1">
                     <Image
-                        src="/public/image.png"
+                        src="/public/Image.png"
                         alt="3D Character"
                         width={500}
                         height={500}
