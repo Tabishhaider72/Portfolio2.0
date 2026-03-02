@@ -13,7 +13,7 @@ export const GENERAL_INFO = {
 export const SOCIAL_LINKS = [
     { name: 'github', url: 'https://github.com/Tabishhaider72' },
     { name: 'linkedin', url: 'https://www.linkedin.com/in/sayed-tabish' },
-    { name: 'facebook', url: 'https://www.facebook.com/tajmirul.2000' },
+    { name: 'facebook', url: 'https://www.facebook.com/' },
     { name: 'Old Version', url: GENERAL_INFO.oldPortfolio },
 ];
 
