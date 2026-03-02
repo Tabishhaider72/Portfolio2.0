@@ -72,7 +72,7 @@ const AboutMe = () => {
                     <div className="md:col-span-7">
                         <div className="text-lg text-muted-foreground max-w-[450px]">
                             <p className="slide-up-and-fade">
-                                I&apos;m a   web developer dedicated to
+                                I&apos;m a Full-Stack software developer dedicated to
                                 turning ideas into creative solutions. I
                                 specialize in creating seamless and intuitive
                                 user experiences.
