@@ -176,7 +176,7 @@ export default function ChatWidget() {
                 <MessageCircle size={20} className="text-white" />
               </div>
               <div>
-                <h3 className="text-white font-bold">Sayed's Assistant</h3>
+                <h3 className="text-white font-bold">Sayed&apos;s Assistant</h3>
                 <p className="text-blue-100 text-xs">Ask about my work</p>
               </div>
             </div>

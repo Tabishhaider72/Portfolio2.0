@@ -1,6 +1,6 @@
 /**
  * API Route: POST /api/chat
- * Handles chat messages and communicates with Gemini API
+ * Handles chat messages and communicates with OpenAI API
  * 
  * Security:
  * - API key never exposed to client
@@ -9,11 +9,11 @@
  * - Error handling for safe responses
  */
 
-import { GoogleGenAI } from '@google/genai';
+import OpenAI from 'openai';
 import { RESUME_CONTEXT } from '@/lib/resumeContext';
 
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY!,
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY!,
 });
 
 // Rate limiting: simple in-memory store (in production, use Redis)
@@ -112,10 +112,13 @@ export async function POST(request: Request) {
       );
     }
 
-    // Call Gemini API with resume context
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.0-flash',
-      contents: `You are a portfolio assistant for Sayed Tabish Haider.
+    // Call OpenAI API with resume context
+    const response = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        {
+          role: 'system',
+          content: `You are a portfolio assistant for Sayed Tabish Haider.
 
 CRITICAL RULES:
 - Only answer questions about Sayed using the resume data below
@@ -125,13 +128,18 @@ CRITICAL RULES:
 - Be professional but friendly
 
 RESUME DATA:
-${RESUME_CONTEXT}
-
-User Question:
-${message}`,
+${RESUME_CONTEXT}`,
+        },
+        {
+          role: 'user',
+          content: message,
+        },
+      ],
+      temperature: 0.7,
+      max_tokens: 500,
     });
 
-    const reply = response.text();
+    const reply = response.choices[0]?.message?.content;
 
     if (!reply) {
       return Response.json(

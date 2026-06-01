@@ -151,6 +151,16 @@ export const RESUME_DATA = {
 // System prompt for Gemini to stay grounded in resume data
 export const SYSTEM_PROMPT = `You are an AI assistant representing Syed Tabish Haider, a Full Stack Developer from Delhi NCR.
 
+NAME RECOGNITION:
+The user may refer to Syed Tabish Haider by many variations — treat all of the following as the same person:
+- Syed, Sayed, Sayd
+- Tabish, Tabbish
+- Haider, Hayder
+- Syed Tabish, Sayed Tabish
+- Tabish Haider, Haider Tabish
+- Syed Tabish Haider, Sayed Tabish Haider
+- Any reasonable combination or misspelling of the above
+
 CRITICAL RULES:
 1. Answer ONLY questions about Syed Tabish Haider using the provided resume data
 2. Base ALL answers strictly on the provided resume information
@@ -173,4 +183,67 @@ TONE:
 - Confident about capabilities from resume
 - Humble about limitations (only what's in resume)
 - Engaging and conversational`;
+
+// Format resume data as string for API context
+export const RESUME_CONTEXT = `
+PROFESSIONAL PROFILE:
+Name: ${RESUME_DATA.personal.name}
+Role: ${RESUME_DATA.personal.role}
+Location: ${RESUME_DATA.personal.location}
+Email: ${RESUME_DATA.personal.email}
+Phone: ${RESUME_DATA.personal.phone}
+Portfolio: ${RESUME_DATA.personal.portfolio}
+GitHub: ${RESUME_DATA.personal.github}
+LinkedIn: ${RESUME_DATA.personal.linkedin}
+Open to Relocate: ${RESUME_DATA.personal.openToRelocate ? 'Yes' : 'No'}
+
+PROFESSIONAL SUMMARY:
+${RESUME_DATA.summary}
+
+WORK EXPERIENCE:
+${RESUME_DATA.experience
+  .map(
+    (exp) => `
+${exp.role} at ${exp.company}
+Duration: ${exp.duration} | Location: ${exp.location}
+${exp.highlights.map((h) => `• ${h}`).join('\n')}
+`
+  )
+  .join('\n---\n')}
+
+PROJECTS:
+${RESUME_DATA.projects
+  .map(
+    (proj) => `
+PROJECT: ${proj.name}
+Description: ${proj.description}
+Technologies: ${proj.tech.join(', ')}
+Highlights:
+${proj.highlights.map((h) => `• ${h}`).join('\n')}
+`
+  )
+  .join('\n---\n')}
+
+TECHNICAL SKILLS:
+Programming Languages & Frameworks: ${RESUME_DATA.skills.programming.join(', ')}
+Tools & Platforms: ${RESUME_DATA.skills.tools.join(', ')}
+
+EDUCATION:
+${RESUME_DATA.education
+  .map(
+    (edu) => `
+${edu.degree}
+Institution: ${edu.institution}
+Graduation: ${edu.year} | GPA: ${edu.gpa}
+Location: ${edu.location}
+`
+  )
+  .join('\n')}
+
+COURSEWORK:
+${RESUME_DATA.coursework.join(', ')}
+
+IMPORTANT RULES:
+${RESUME_DATA.rules.map((rule) => `• ${rule}`).join('\n')}
+`;
 

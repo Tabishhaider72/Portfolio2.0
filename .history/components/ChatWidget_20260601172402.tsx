@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { MessageCircle, X, Minus, Maximize2, RefreshCw, AlertCircle, Loader2 } from 'lucide-react';
+import { MessageCircle, X, Minus, Maximize2, RefreshCw, AlertCircle, ArrowUp, Loader2 } from 'lucide-react';
 import MessageBubble from './MessageBubble';
 import ChatInput from './ChatInput';
 
@@ -144,7 +144,7 @@ export default function ChatWidget() {
               <MessageCircle size={13} className="text-white dark:text-black" />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Syed&apos;s Assistant</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">Sayed's Assistant</p>
               <p className="text-[10px] text-gray-400">Ask about my work</p>
             </div>
           </div>
