@@ -122,20 +122,20 @@ export default function ChatWidget() {
           setIsOpen(!isOpen);
           setIsMinimized(false);
         }}
-        className={`fixed bottom-4 right-4 z-50 w-12 h-12 rounded-full bg-black dark:bg-white text-white dark:text-black shadow-lg flex items-center justify-center transition-all duration-200 hover:opacity-80 ${
-          isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-14 h-14 rounded-full bg-black dark:bg-white text-white dark:text-black shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:shadow-[0_0_20px_rgba(255,255,255,0.1)] flex items-center justify-center transition-all duration-300 hover:scale-105 ${
+          isOpen ? 'opacity-0 pointer-events-none translate-y-10' : 'opacity-100 translate-y-0'
         }`}
         aria-label="Open chat"
       >
-        <MessageCircle size={20} />
-        <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-400 rounded-full" />
+        <MessageCircle size={24} />
+        <span className="absolute 1 w-3 h-3 bg-green-400 rounded-full border-2 border-white dark:border-gray-950" style={{ top: '2px', right: '2px' }} />
       </button>
 
       {/* Chat Window */}
       <div
-        className={`fixed bottom-4 right-4 z-50 w-[360px] bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-xl flex flex-col transition-all duration-200 ${
-          isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-3 pointer-events-none'
-        } ${isMinimized ? 'h-auto' : 'h-[540px]'}`}
+        className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[95vw] md:w-[750px] bg-white dark:bg-gray-950 border border-gray-200 dark:border-gray-800 rounded-2xl shadow-2xl flex flex-col transition-all duration-300 ${
+          isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-8 pointer-events-none'
+        } ${isMinimized ? 'h-auto' : 'h-[80vh] max-h-[700px]'}`}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-800">

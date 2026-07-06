@@ -327,24 +327,7 @@ export const PROJECTS: IProject[] = [
       role: `Lead Engineer — designed the RAG pipeline, implemented embedding storage and retrieval, and enabled streaming conversational UI.`,
     },
 
-    {
-      title: 'CVRoast Frontend',
-      slug: 'cvroast-frontend',
-      techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
-      thumbnail: '/projects/Project4.png',
-      longThumbnail: '/projects/Project4.png',
-      images: ['/projects/Project4.png'],
-      sourceCode: 'https://github.com/Tabishhaider72/cvroast-frontend',
-      liveUrl: undefined,
-      year: 2025,
-      description: `AI-powered ATS resume analysis dashboard for evaluating resumes with structured scoring and recruiter insights.
 
-  Tech & Architecture: Frontend-only dashboard built with Next.js and TypeScript that consumes an AI scoring API. The UI visualizes ATS-style scoring and recruiter-friendly insights using charts and structured cards. The app is componentized for reusability and supports file uploads that are sent to the analysis API.
-
-  Features & Highlights: Resume upload and parsing interface, ATS scoring visualization, AI-generated feedback snippets, and a modern SaaS-style dashboard layout optimized for recruiter workflows. Focused on accessibility and clear data visualization for decision-making.
-  `,
-      role: `Frontend Engineer — built the dashboard UI, upload flows, and visualization components.`,
-    },
 
     {
       title: 'AI Data Insighter',

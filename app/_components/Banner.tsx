@@ -69,7 +69,7 @@ const Banner = () => {
                             as="link"
                             target="_blank"
                             rel="noopener noreferrer"
-                            href="https://drive.google.com/file/d/1IiJSh5-UbwYnj27bLWjpnNTmF3et6luS/view"
+                            href="https://drive.google.com/file/d/1c3eoMNk8QB4-GCmmo5SlgSFCo9nRBRVz/view"
                             variant="secondary"
                             className="banner-button slide-up-and-fade"
                         >

@@ -114,7 +114,7 @@ const ProjectList = () => {
                             className="max-md:hidden absolute right-0 top-0 z-[1] pointer-events-none w-[200px] xl:w-[350px] aspect-[3/4] overflow-hidden opacity-0"
                             ref={imageContainer}
                         >
-                            {PROJECTS.map((project) => (
+                            {PROJECTS.map((project, index) => (
                                 <Image
                                     src={project.thumbnail}
                                     alt="Project"
@@ -129,7 +129,7 @@ const ProjectList = () => {
                                         },
                                     )}
                                     ref={imageRef}
-                                    key={project.slug}
+                                    key={`${project.slug}-${index}`}
                                 />
                             ))}
                         </div>
@@ -145,7 +145,7 @@ const ProjectList = () => {
                                 project={project}
                                 selectedProject={selectedProject}
                                 onMouseEnter={handleMouseEnter}
-                                key={project.slug}
+                                key={`${project.slug}-${index}`}
                             />
                         ))}
                     </div>
