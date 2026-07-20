@@ -44,7 +44,7 @@ export default function MessageBubble({ role, content, timestamp, isLoading, isE
       <div className={`flex flex-col gap-1 max-w-[78%] ${isUser ? 'items-end' : 'items-start'}`}>
         {/* Bubble */}
         <div
-          className={`px-3 py-2 rounded-xl text-sm leading-relaxed ${
+          className={`px-3 py-2 rounded-xl text-sm leading-relaxed break-words overflow-hidden ${
             isUser
               ? 'bg-black dark:bg-white text-white dark:text-black rounded-br-sm'
               : isError

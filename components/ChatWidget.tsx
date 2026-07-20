@@ -4,6 +4,9 @@ import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Minus, Maximize2, RefreshCw, AlertCircle, Loader2 } from 'lucide-react';
 import MessageBubble from './MessageBubble';
 import ChatInput from './ChatInput';
+import ChatSuggestions from './ChatSuggestions';
+import VoiceControls from './VoiceControls';
+import { useVoiceConversation } from '../lib/hooks/useVoiceConversation';
 
 interface Message {
   id: string;
@@ -18,7 +21,7 @@ function createInitialMessage(): Message {
   return {
     id: '0',
     role: 'assistant',
-    content: "Hi there! I'm here to answer questions about **Sayed's** experience, skills, and projects.\n\nFeel free to ask anything!",
+    content: "Hi there! I'm here to answer questions about **Tabish's** experience, skills, and projects.\n\nFeel free to ask anything!",
     timestamp: new Date(),
   };
 }
@@ -31,31 +34,7 @@ export default function ChatWidget() {
   const [hasInteracted, setHasInteracted] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (messages.length === 0) {
-      setMessages([createInitialMessage()]);
-    }
-  }, []);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === '/') {
-        e.preventDefault();
-        setIsOpen(true);
-      }
-      if (e.key === 'Escape' && isOpen) {
-        setIsOpen(false);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen]);
-
-  const handleSendMessage = async (userMessage: string) => {
+  const handleSendMessage = async (userMessage: string): Promise<string | null> => {
     setHasInteracted(true);
 
     const userMsg: Message = {
@@ -95,6 +74,8 @@ export default function ChatWidget() {
           msg.isLoading ? { ...msg, content: replyText, isLoading: false } : msg
         )
       );
+      
+      return replyText;
     } catch (err) {
       const errorText = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
       setMessages((prev) =>
@@ -104,14 +85,72 @@ export default function ChatWidget() {
             : msg
         )
       );
+      return null;
     } finally {
       setIsLoading(false);
     }
   };
 
+  const {
+    isSupported: isVoiceSupported,
+    voiceState,
+    liveTranscript,
+    finalTranscript,
+    errorMessage,
+    startConversation,
+    stopConversation,
+    interrupt,
+    handleProcessSpeech
+  } = useVoiceConversation({
+    onSendMessage: handleSendMessage
+  });
+
+  useEffect(() => {
+    if (messages.length === 0) {
+      setMessages([createInitialMessage()]);
+    }
+  }, []);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  useEffect(() => {
+    if (isOpen && !isMinimized) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen, isMinimized]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+        e.preventDefault();
+        setIsOpen(true);
+      }
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+        if (voiceState !== 'idle') {
+          stopConversation();
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, voiceState, stopConversation]);
+
+
+
   const handleClearChat = () => {
     setMessages([createInitialMessage()]);
     setHasInteracted(false);
+    if (voiceState !== 'idle') {
+      stopConversation();
+    }
   };
 
   return (
@@ -174,36 +213,57 @@ export default function ChatWidget() {
           </div>
         </div>
 
-        {/* Messages */}
+        {/* Messages / Voice Controls */}
         {!isMinimized && (
           <>
-            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4" role="log" aria-live="polite">
-              {messages.map((msg) => (
-                <MessageBubble
-                  key={msg.id}
-                  role={msg.role}
-                  content={msg.content}
-                  timestamp={msg.timestamp}
-                  isLoading={msg.isLoading}
-                  isError={msg.isError}
+            {voiceState !== 'idle' ? (
+              <div className="flex-1 overflow-hidden relative">
+                <VoiceControls
+                  voiceState={voiceState}
+                  liveTranscript={liveTranscript}
+                  finalTranscript={finalTranscript}
+                  errorMessage={errorMessage}
+                  onStop={stopConversation}
+                  onInterrupt={interrupt}
+                  onManualSubmit={handleProcessSpeech}
                 />
-              ))}
-              <div ref={messagesEndRef} />
-            </div>
+              </div>
+            ) : (
+              <>
+                <div className="flex-1 overflow-y-auto overscroll-contain px-4 py-4 space-y-4" role="log" aria-live="polite">
+                  {messages.map((msg) => (
+                    <MessageBubble
+                      key={msg.id}
+                      role={msg.role}
+                      content={msg.content}
+                      timestamp={msg.timestamp}
+                      isLoading={msg.isLoading}
+                      isError={msg.isError}
+                    />
+                  ))}
+                  {messages.length === 1 && !hasInteracted && (
+                    <ChatSuggestions onSelect={handleSendMessage} />
+                  )}
+                  <div ref={messagesEndRef} />
+                </div>
 
-            {/* Input */}
-            <div className="border-t border-gray-100 dark:border-gray-800 px-3 py-3">
-              <ChatInput
-                onSubmit={handleSendMessage}
-                disabled={isLoading}
-                placeholder="Ask about experience, skills, projects…"
-              />
-              {hasInteracted && (
-                <p className="text-[10px] text-gray-400 text-right mt-1.5 pr-1">
-                  Enter to send · Shift+Enter for new line
-                </p>
-              )}
-            </div>
+                {/* Input */}
+                <div className="border-t border-gray-100 dark:border-gray-800 px-3 py-3">
+                  <ChatInput
+                    onSubmit={handleSendMessage}
+                    disabled={isLoading}
+                    placeholder="Ask about experience, skills, projects…"
+                    onVoiceClick={startConversation}
+                    isVoiceSupported={isVoiceSupported}
+                  />
+                  {hasInteracted && (
+                    <p className="text-[10px] text-gray-400 text-right mt-1.5 pr-1">
+                      Enter to send · Shift+Enter for new line
+                    </p>
+                  )}
+                </div>
+              </>
+            )}
           </>
         )}
       </div>
