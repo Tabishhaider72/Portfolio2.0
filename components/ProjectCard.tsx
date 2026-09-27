@@ -52,7 +52,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, searchQuery }
   return (
     <div
       ref={cardRef}
-      className="group bg-white border border-gray-200 rounded-lg overflow-hidden shadow-none transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] hover:scale-[1.02] hover:border-gray-400 focus-within:border-black"
+      className="group bg-white border border-gray-200 rounded-lg overflow-hidden shadow-none transition-transform duration-300 ease-in-out hover:scale-[1.02] hover:border-gray-400 focus-within:border-black"
       style={{ boxShadow: '0 1px 4px rgba(0,0,0,0.03)' }}
     >
       <div className="aspect-[4/3] w-full relative">

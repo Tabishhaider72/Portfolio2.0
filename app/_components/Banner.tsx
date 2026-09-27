@@ -1,6 +1,7 @@
 'use client';
 import ArrowAnimation from '@/components/ArrowAnimation';
 import Button from '@/components/Button';
+import TransitionLink from '@/components/TransitionLink';
 import { GENERAL_INFO } from '@/lib/data';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -55,16 +56,13 @@ const Banner = () => {
                         Each project I build combines intuitive functionality with reliable, high-performance code.
                     </p>
                     <div className="flex gap-4 mt-9">
-                        <Button
-                            as="link"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={GENERAL_INFO.linkedinProfile}
-                            variant="primary"
-                            className="banner-button slide-up-and-fade"
+                        <TransitionLink
+                            href="/hire"
+                            className="banner-button slide-up-and-fade group h-12 px-8 inline-flex justify-center items-center gap-2 text-lg uppercase font-anton tracking-widest outline-none transition-colors relative overflow-hidden bg-primary text-primary-foreground hover:bg-primary-hover"
                         >
-                            Hire Me
-                        </Button>
+                            <span className="absolute top-[200%] left-0 right-0 h-full bg-white rounded-[50%] group-hover:top-0 transition-all duration-500 scale-150"></span>
+                            <span className="z-[1]">Hire Me</span>
+                        </TransitionLink>
                         <Button
                             as="link"
                             target="_blank"
